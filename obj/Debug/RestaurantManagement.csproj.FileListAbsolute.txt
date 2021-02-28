@@ -1,0 +1,13 @@
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.csprojAssemblyReference.cache
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.Mg_Em_From.resources
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.Properties.Resources.resources
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.GenerateResource.cache
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.csproj.CoreCompileInputs.cache
+E:\RestaurantManagement\bin\Debug\RestaurantManagement.exe.config
+E:\RestaurantManagement\bin\Debug\RestaurantManagement.exe
+E:\RestaurantManagement\bin\Debug\RestaurantManagement.pdb
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.exe
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.pdb
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.Mg_F_Form.resources
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.Mg_Login_Form.resources
+E:\RestaurantManagement\obj\Debug\RestaurantManagement.Mg_Path_To_Em_And_F.resources
