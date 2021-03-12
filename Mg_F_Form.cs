@@ -24,9 +24,13 @@ namespace RestaurantManagement
         {
             InitializeComponent();
             formPath = formpath;
+            Display();
+        }
+        private void Display()
+        {
             using (cmd = new SqlCommand("SELECT F_ID,F_Name,F_Price,F_Pic,TF_Name FROM Food F,TypeFood TyFd WHERE F.TF_ID=TyFd.TF_ID AND F_Status=1", con))
             {
-                using (dataF = new SqlDataAdapter(cmd))
+                using(dataF = new SqlDataAdapter(cmd))
                 {
                     dataF.Fill(Food);
                 }
@@ -38,7 +42,6 @@ namespace RestaurantManagement
             Sh_F_Data.Columns["F_Pic"].HeaderText = "Picture";
             Sh_F_Data.Columns["TF_Name"].HeaderText = "Kind";
         }
-
         private void Mg_F_Form_Load(object sender, EventArgs e)
         {
             con.Open();
@@ -48,18 +51,8 @@ namespace RestaurantManagement
             DataTable typefood = new DataTable();
             typefood.Columns.Add("TypeFood", typeof(string));
             typefood.Load(reader);
-            CO_SL_T_F.ValueMember = "TF_Name";
-            CO_SL_T_F.DataSource = typefood;
-            con.Close();
-            //
-            con.Open();
-            SqlDataReader reader1;
-            reader1 = cmd.ExecuteReader();
-            DataTable typefood1 = new DataTable();
-            typefood1.Columns.Add("TypeFood", typeof(string));
-            typefood1.Load(reader1);
             Co_TFood.ValueMember = "TF_Name";
-            Co_TFood.DataSource = typefood1;
+            Co_TFood.DataSource = typefood;
             con.Close();
         }
 
@@ -74,19 +67,6 @@ namespace RestaurantManagement
             }
         }
 
-        private void BT_Clear_Click(object sender, EventArgs e)
-        {
-            TextBox txt = default(TextBox);
-            foreach (Control ctl in this.Controls)
-            {
-                if (object.ReferenceEquals(ctl.GetType(), typeof(TextBox)))
-                {
-                    txt = (TextBox)ctl;
-                    txt.Text = null;
-                }
-            }
-        }
-
         private void BT_UpLoadPic_Click(object sender, EventArgs e)
         {
             open = new OpenFileDialog();
@@ -94,6 +74,7 @@ namespace RestaurantManagement
             if (open.ShowDialog() == DialogResult.OK)
             {
                 P_Food.Image = new Bitmap(open.FileName);
+                imageUrl = open.FileName;
                 P_Food.SizeMode = PictureBoxSizeMode.CenterImage;
                 P_Food.SizeMode = PictureBoxSizeMode.StretchImage;
             }
@@ -107,16 +88,49 @@ namespace RestaurantManagement
             }
         }
 
-        private void BT_Cancel_Click(object sender, EventArgs e)
+        private void BT_Log_Out_Click(object sender, EventArgs e)
         {
             formPath.Show();
             Close();
         }
 
-        private void CO_SL_T_F_SelectedIndexChanged(object sender, EventArgs e)
+        private void BT_Save_Click(object sender, EventArgs e)
         {
+            Image image = P_Food.Image;
+            byte[] arr;
+            ImageConverter converter = new ImageConverter();
+            arr =(byte[])converter.ConvertTo(image,typeof(byte[]));
 
+            con.Open();
+            cmd = new SqlCommand("INSERT INTO Food(F_Name,F_Price,F_Pic,F_PicUrl,F_Status,TF_ID) VALUES(@name,@price,@photo,@photourl,1,(SELECT TF_ID FROM TypeFood WHERE TF_Name = @tfid))", con);
+            cmd.Parameters.AddWithValue("@name", T_FName.Text);
+            cmd.Parameters.AddWithValue("@price", T_FPrice.Text);
+            cmd.Parameters.AddWithValue("@photo", arr);
+            cmd.Parameters.AddWithValue("@photourl", imageUrl);
+            cmd.Parameters.AddWithValue("@tfid", Co_TFood.SelectedValue.ToString());
+            cmd.ExecuteNonQuery();
+            MessageBox.Show("Save Success!!");
+            Sh_F_Data.DataSource = null;
+            Display();
         }
 
+        private void BT_Clear_Click_1(object sender, EventArgs e)
+        {
+            TextBox txt = default(TextBox);
+            foreach (Control ctl in this.Controls)
+            {
+                if (object.ReferenceEquals(ctl.GetType(), typeof(TextBox)))
+                {
+                    txt = (TextBox)ctl;
+                    txt.Text = null;
+                }
+            }
+            P_Food.Image = null;
+        }
+
+        private void Bt_Refresh_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
