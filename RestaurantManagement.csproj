@@ -107,11 +107,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ดาวน์โหลด.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\png-clipart-restaurant-chef-s-uniform-computer-icons-cooking.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
