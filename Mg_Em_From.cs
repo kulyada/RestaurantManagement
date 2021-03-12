@@ -19,39 +19,32 @@ namespace RestaurantManagement
         SqlCommand cmd;
         SqlDataAdapter dataEm;
         ArrayList gender = new ArrayList();
+        ArrayList status = new ArrayList();
         DataTable Employ = new DataTable();
         public Mg_Em_From(Form formpath)
         {
             InitializeComponent();
-            T_IDNum.MaxLength = 13;
-            T_Tel.MaxLength = 10;
             formPath = formpath;
-            using (cmd = new SqlCommand("SELECT Em_ID,Em_IDNum , Em_Name , Em_SurName , Em_Gender , Em_Birthday , Em_Address , Em_Nationality  , Em_Tel , Em_Salary , Em_Email ,D_Name FROM Employee Em,Department Dept WHERE Em.D_ID=Dept.D_ID AND Em_Status=1", con))
-            {
-                using (dataEm = new SqlDataAdapter(cmd))
-                {
-                    dataEm.Fill(Employ);
-                }
-            }
-            Sh_Em_Data.DataSource = Employ;
+            Display();
+            //Add Status in ComboBox
+            status.Add("Work");
+            status.Add("Resigned");
+            Co_Status.DataSource = status;
+        }
+         public void Display()
+        {
+            con.Open();
+            DataTable dt = new DataTable();
+            dataEm = new SqlDataAdapter("SELECT Em_ID, Em_Name , Em_SurName ,Em_Password,D_Name FROM Employee Em,Department Dept WHERE Em.D_ID=Dept.D_ID AND Em_Status=1", con);
+            dataEm.Fill(dt);
+            Sh_Em_Data.DataSource = dt;
+            con.Close();
             //Rename Header Columns in Datagridview(Sh_Em_Data)
             Sh_Em_Data.Columns["Em_ID"].HeaderText = "Employee ID";
-            Sh_Em_Data.Columns["Em_IDNum"].HeaderText = "Identification NO.";
             Sh_Em_Data.Columns["Em_Name"].HeaderText = "Name";
             Sh_Em_Data.Columns["Em_SurName"].HeaderText = "Surname";
-            Sh_Em_Data.Columns["Em_Gender"].HeaderText = "Gender";
-            Sh_Em_Data.Columns["Em_Birthday"].HeaderText = "Date Of Birth";
-            Sh_Em_Data.Columns["Em_Birthday"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            Sh_Em_Data.Columns["Em_Address"].HeaderText = "Address";
-            Sh_Em_Data.Columns["Em_Nationality"].HeaderText = "Nationality";
-            Sh_Em_Data.Columns["Em_Tel"].HeaderText = "tel";
-            Sh_Em_Data.Columns["Em_Salary"].HeaderText = "Salary";
-            Sh_Em_Data.Columns["Em_Email"].HeaderText = "E-Mail";
+            Sh_Em_Data.Columns["Em_Password"].HeaderText = "Password";
             Sh_Em_Data.Columns["D_name"].HeaderText = "Department";
-            // ComboBox
-            gender.Add("Male");
-            gender.Add("Female");
-            Co_Gender.DataSource = gender;
         }
 
         private void Mg_Em_Load(object sender, EventArgs e)
@@ -62,7 +55,6 @@ namespace RestaurantManagement
             reader = cmd.ExecuteReader();
             DataTable depart = new DataTable();
             depart.Columns.Add("Department", typeof(string));
-            depart.Columns.Add("D_ID", typeof(string));
             depart.Load(reader);
             Co_Depart.ValueMember = "D_Name";
             Co_Depart.DataSource = depart;
@@ -81,46 +73,28 @@ namespace RestaurantManagement
 
         private void BT_Save_Click(object sender, EventArgs e)
         {
+            //Randon Password
             Random ran = new Random();
             StringBuilder passran = new StringBuilder();
             passran.Append(ran.Next(000000, 999999).ToString());
-            DateTime today = DateTime.Now;
+            //Insert Data
+            string DatEm = "INSERT INTO Employee(Em_Name , Em_SurName ,Em_Password,Em_Status,D_ID)" +
+                           "VALUES('" + T_Name.Text.ToString() + "' ,'" + T_Surname.Text.ToString() + "','" + passran.ToString() + "', 1 ,(SELECT D_ID FROM Department WHERE D_Name = '" + Co_Depart.SelectedValue.ToString() + "'))";
             con.Open();
-            cmd = new SqlCommand("INSERT INTO Employee(Em_IDNum , Em_Name , Em_SurName , Em_Gender , Em_Birthday , Em_Address , Em_Nationality  , Em_Tel , Em_Salary , Em_Email, Em_Starting_Date , Em_Password)" +
-                                 " VALUES(@Em_IDNum , @Em_Name , @Em_SurName , @Em_Gender , @Em_Birthday , @Em_Address , @Em_Nationality  , @Em_Tel , @Em_Salary , @Em_Email ,@Em_Starting_Date , @Em_Password)", con);
-            cmd.Parameters.Add("@Em_IDNum", T_IDNum.Text);
-            cmd.Parameters.Add("@Em_Name", T_Name.Text);
-            cmd.Parameters.Add("@Em_SurName", T_Surname);
-            cmd.Parameters.Add("@Em_Gender", Co_Gender.Items.ToString());
-            cmd.Parameters.Add("@Em_Birthday", T_Birth.Text);
-            cmd.Parameters.Add("@Em_Address", T_Adress.Text);
-            cmd.Parameters.Add("@Em_Nationality", T_Nation.Text);
-            cmd.Parameters.Add("@Em_Tel", T_Tel.Text);
-            cmd.Parameters.Add("@Em_Salary", T_Salary.Text);
-            cmd.Parameters.Add("@Em_Email", T_Email.Text);
-            cmd.Parameters.Add("@Em_Starting_Date", today.ToString("dd/MM/yyyy"));
-            cmd.Parameters.Add("@Em_Password", passran);
-            con.Close();
-           
-        }
-        private Boolean VerifyIDNum(String Idnum)
-        {
-            int sumValue = 0;
-            for (int i = 0; i < Idnum.Length - 1; i++)
-            { 
-                sumValue += int.Parse(Idnum.ToString()) * (13 - i);
+            if (T_Name.Text != "" && T_Surname.Text != "")
+            {
+                cmd = new SqlCommand(DatEm, con);
+                MessageBox.Show("Password : " + passran.ToString(), "Save Success!!", MessageBoxButtons.OK);
+                cmd.ExecuteNonQuery();
             }
-            int v = 11 - (sumValue % 11);
-            return Idnum[12].ToString() == v.ToString();
+            else
+            {
+                MessageBox.Show("Please Input", "WARNING!!", MessageBoxButtons.OK);
+            }
+            con.Close();
+            Display();
         }
 
-        private void T_IDNum_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && T_IDNum.Text.Length != 13)
-            {
-                e.Handled = true; 
-            }
-        }
         private void BT_Clear_Click(object sender, EventArgs e)
         {
             TextBox txt = default(TextBox);
@@ -132,38 +106,56 @@ namespace RestaurantManagement
                     txt.Text = null;
                 }
             }
+            L_Sh_Em_ID.Text = "";
         }
 
-        private void BT_Cancel_Click(object sender, EventArgs e)
-        {
-            formPath.Show();
-            Close();
-        }
 
         private void Sh_Em_Data_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
                 DataGridViewRow row = Sh_Em_Data.Rows[e.RowIndex];
-                T_IDNum.Text = row.Cells["Em_IDNum"].Value.ToString();
+                L_Sh_Em_ID.Text = row.Cells["Em_ID"].Value.ToString();
                 T_Name.Text = row.Cells["Em_Name"].Value.ToString();
                 T_Surname.Text = row.Cells["Em_SurName"].Value.ToString();
-                Co_Gender.Text = row.Cells["Em_Gender"].Value.ToString();
-                T_Birth.Text = Convert.ToDateTime(Employ.Rows[e.RowIndex]["Em_Birthday"]).ToString("dd/MM/yyyy");
-                T_Adress.Text = row.Cells["Em_Address"].Value.ToString();
-                T_Nation.Text = row.Cells["Em_Nationality"].Value.ToString();
-                T_Tel.Text = row.Cells["Em_Tel"].Value.ToString();
-                T_Salary.Text = row.Cells["Em_Salary"].Value.ToString();
                 Co_Depart.Text = row.Cells["D_Name"].Value.ToString();
             }
         }
 
-        private void T_Salary_KeyPress(object sender, KeyPressEventArgs e)
+        private void BT_Update_Click(object sender, EventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back )
+            cmd = new SqlCommand("UPDATE Employee SET Em_Name =@name, Em_SurName=@surname,(SELECT D_ID FROM Department WHERE D_Name = @depart) WHERE Em_ID =@id", con);
+            con.Open();
+            cmd.Parameters.AddWithValue("@id", L_Sh_Em_ID.Text.ToString());
+            cmd.Parameters.AddWithValue("@name", T_Name.Text.ToString());
+            cmd.Parameters.AddWithValue("@surname", T_Surname.Text.ToString());
+            cmd.Parameters.AddWithValue("@depart", Co_Depart.SelectedValue.ToString());
+            cmd.ExecuteNonQuery();
+            MessageBox.Show("Record Updated Successfully");
+            con.Close();
+            Display();
+            /*using (cmd=new SqlCommand("UPDATE Employee SET Em_Name ='" + T_Name.Text.ToString() + "' , Em_SurName='" + T_Surname.Text.ToString() + "',(SELECT D_ID FROM Department WHERE D_Name = '" + Co_Depart.SelectedValue.ToString() + "') WHERE Em_ID ='" + L_Sh_Em_ID.Text.ToString() + "'",con))
             {
-                e.Handled = true;
+                MessageBox.Show("Update Success!!");
             }
+            if (Co_Status.SelectedItem.ToString() == "Resigned")
+            {
+                cmd = new SqlCommand("UPDATE Employee SET Em_Status = 0 WHERE Em_ID ='" + L_Sh_Em_ID.Text.ToString() + "'",con);
+            }*/
+        }
+
+        private void BT_Log_Out_Click(object sender, EventArgs e)
+        {
+            formPath.Show();
+            Close();
+        }
+
+        private void Bt_Refresh_Click(object sender, EventArgs e)
+        {
+         /*   Sh_Em_Data.DataSource = null;
+            Sh_Em_Data.Update();
+            Sh_Em_Data.Refresh();
+            Display();*/
         }
     }
 }
