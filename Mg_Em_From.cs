@@ -21,17 +21,17 @@ namespace RestaurantManagement
         ArrayList gender = new ArrayList();
         ArrayList status = new ArrayList();
         DataTable Employ = new DataTable();
-        public Mg_Em_From(Form formpath)
+        public Mg_Em_From(Form Formpath)
         {
             InitializeComponent();
-            formPath = formpath;
+            formPath = Formpath;
             Display();
             //Add Status in ComboBox
             status.Add("Work");
             status.Add("Resigned");
             Co_Status.DataSource = status;
         }
-         public void Display()
+         private void Display()
         {
             con.Open();
             DataTable dt = new DataTable();
@@ -58,16 +58,6 @@ namespace RestaurantManagement
             depart.Load(reader);
             Co_Depart.ValueMember = "D_Name";
             Co_Depart.DataSource = depart;
-            con.Close();
-            //
-            con.Open();
-            SqlDataReader reader1;
-            reader1 = cmd.ExecuteReader();
-            DataTable depart1 = new DataTable();
-            depart1.Columns.Add("Department", typeof(string));
-            depart1.Load(reader1);
-            Co_Sl_Depart.ValueMember = "D_Name";
-            Co_Sl_Depart.DataSource = depart1;
             con.Close();
         }
 
@@ -122,35 +112,6 @@ namespace RestaurantManagement
             }
         }
 
-        private void BT_Update_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                cmd = new SqlCommand("UPDATE Employee SET Em_Name =@name, Em_SurName=@surname,(SELECT D_ID FROM Department WHERE D_Name = @depart) WHERE Em_ID =@id", con);
-                con.Open();
-                cmd.Parameters.AddWithValue("@id", L_Sh_Em_ID.Text.ToString());
-                cmd.Parameters.AddWithValue("@name", T_Name.Text.ToString());
-                cmd.Parameters.AddWithValue("@surname", T_Surname.Text.ToString());
-                cmd.Parameters.AddWithValue("@depart", Co_Depart.SelectedValue.ToString());
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Record Updated Successfully");
-                con.Close();
-                Display();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show("Error" + e.Message);
-            }
-            /*using (cmd=new SqlCommand("UPDATE Employee SET Em_Name ='" + T_Name.Text.ToString() + "' , Em_SurName='" + T_Surname.Text.ToString() + "',(SELECT D_ID FROM Department WHERE D_Name = '" + Co_Depart.SelectedValue.ToString() + "') WHERE Em_ID ='" + L_Sh_Em_ID.Text.ToString() + "'",con))
-            {
-                MessageBox.Show("Update Success!!");
-            }
-            if (Co_Status.SelectedItem.ToString() == "Resigned")
-            {
-                cmd = new SqlCommand("UPDATE Employee SET Em_Status = 0 WHERE Em_ID ='" + L_Sh_Em_ID.Text.ToString() + "'",con);
-            }*/
-        }
-
         private void BT_Log_Out_Click(object sender, EventArgs e)
         {
             formPath.Show();
@@ -159,10 +120,10 @@ namespace RestaurantManagement
 
         private void Bt_Refresh_Click(object sender, EventArgs e)
         {
-         /*   Sh_Em_Data.DataSource = null;
+            Sh_Em_Data.DataSource = null;
             Sh_Em_Data.Update();
             Sh_Em_Data.Refresh();
-            Display();*/
+            Display();
         }
     }
 }
