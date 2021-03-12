@@ -124,16 +124,23 @@ namespace RestaurantManagement
 
         private void BT_Update_Click(object sender, EventArgs e)
         {
-            cmd = new SqlCommand("UPDATE Employee SET Em_Name =@name, Em_SurName=@surname,(SELECT D_ID FROM Department WHERE D_Name = @depart) WHERE Em_ID =@id", con);
-            con.Open();
-            cmd.Parameters.AddWithValue("@id", L_Sh_Em_ID.Text.ToString());
-            cmd.Parameters.AddWithValue("@name", T_Name.Text.ToString());
-            cmd.Parameters.AddWithValue("@surname", T_Surname.Text.ToString());
-            cmd.Parameters.AddWithValue("@depart", Co_Depart.SelectedValue.ToString());
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Record Updated Successfully");
-            con.Close();
-            Display();
+            try
+            {
+                cmd = new SqlCommand("UPDATE Employee SET Em_Name =@name, Em_SurName=@surname,(SELECT D_ID FROM Department WHERE D_Name = @depart) WHERE Em_ID =@id", con);
+                con.Open();
+                cmd.Parameters.AddWithValue("@id", L_Sh_Em_ID.Text.ToString());
+                cmd.Parameters.AddWithValue("@name", T_Name.Text.ToString());
+                cmd.Parameters.AddWithValue("@surname", T_Surname.Text.ToString());
+                cmd.Parameters.AddWithValue("@depart", Co_Depart.SelectedValue.ToString());
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Record Updated Successfully");
+                con.Close();
+                Display();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Error" + e.Message);
+            }
             /*using (cmd=new SqlCommand("UPDATE Employee SET Em_Name ='" + T_Name.Text.ToString() + "' , Em_SurName='" + T_Surname.Text.ToString() + "',(SELECT D_ID FROM Department WHERE D_Name = '" + Co_Depart.SelectedValue.ToString() + "') WHERE Em_ID ='" + L_Sh_Em_ID.Text.ToString() + "'",con))
             {
                 MessageBox.Show("Update Success!!");
