@@ -28,13 +28,12 @@ namespace RestaurantManagement
         }
         private void Display()
         {
-            using (cmd = new SqlCommand("SELECT F_ID,F_Name,F_Price,F_Pic,TF_Name FROM Food F,TypeFood TyFd WHERE F.TF_ID=TyFd.TF_ID AND F_Status=1", con))
-            {
-                using(dataF = new SqlDataAdapter(cmd))
-                {
-                    dataF.Fill(Food);
-                }
-            }
+            con.Open();
+            DataTable dt = new DataTable();
+            dataF = new SqlDataAdapter("SELECT F_ID,F_Name,F_Price,F_Pic,TF_Name FROM Food F,TypeFood TyFd WHERE F.TF_ID=TyFd.TF_ID AND F_Status=1", con);
+            dataF.Fill(dt);
+            Sh_F_Data.DataSource = dt;
+            con.Close();
             Sh_F_Data.DataSource = Food;
             Sh_F_Data.Columns["F_ID"].HeaderText = "Food ID";
             Sh_F_Data.Columns["F_Name"].HeaderText = "Name";
@@ -127,6 +126,14 @@ namespace RestaurantManagement
         {
             formPath.Show();
             Close();
+        }
+
+        private void Bt_Refresh_Click(object sender, EventArgs e)
+        {
+            Sh_F_Data.DataSource = null;
+            Sh_F_Data.Update();
+            Sh_F_Data.Refresh();
+            Display();
         }
     }
 }
