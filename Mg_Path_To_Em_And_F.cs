@@ -19,21 +19,21 @@ namespace RestaurantManagement
             formLog = formlog_in;
         }
 
-        private void BT_To_Em_Click(object sender, EventArgs e)
+        private void Bt_to_Employ_Click(object sender, EventArgs e)
         {
             Mg_Em_From mg_Em_From = new Mg_Em_From(this);
             Hide();
             mg_Em_From.Show();
         }
 
-        private void BT_To_F_Click(object sender, EventArgs e)
+        private void Bt_to_F_Click_1(object sender, EventArgs e)
         {
             Mg_F_Form mg_F_Form = new Mg_F_Form(this);
             Hide();
             mg_F_Form.Show();
         }
 
-        private void BT_Logout_Click(object sender, EventArgs e)
+        private void BT_Log_Out_Click(object sender, EventArgs e)
         {
             formLog.Show();
             Close();
