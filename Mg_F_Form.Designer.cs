@@ -235,6 +235,7 @@ namespace RestaurantManagement
             this.Bt_Refresh.Size = new System.Drawing.Size(33, 34);
             this.Bt_Refresh.TabIndex = 67;
             this.Bt_Refresh.UseVisualStyleBackColor = true;
+            this.Bt_Refresh.Click += new System.EventHandler(this.Bt_Refresh_Click);
             // 
             // BT_Log_Out
             // 
