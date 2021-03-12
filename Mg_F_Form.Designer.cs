@@ -42,16 +42,12 @@ namespace RestaurantManagement
             this.Bt_Pic = new System.Windows.Forms.Button();
             this.L_Show = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.BT_Log_Out = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Bt_to_T = new System.Windows.Forms.Button();
             this.Bt_to_F = new System.Windows.Forms.Button();
-            this.Bt_to_Employ = new System.Windows.Forms.Button();
-            this.Bt_to_Chef = new System.Windows.Forms.Button();
-            this.Bt_To_Cashier = new System.Windows.Forms.Button();
             this.BT_Clear = new System.Windows.Forms.Button();
             this.BT_Save = new System.Windows.Forms.Button();
             this.Bt_Refresh = new System.Windows.Forms.Button();
+            this.BT_Log_Out = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Sh_F_Data)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.P_Food)).BeginInit();
             this.panel2.SuspendLayout();
@@ -181,49 +177,14 @@ namespace RestaurantManagement
             this.panel2.Size = new System.Drawing.Size(1296, 124);
             this.panel2.TabIndex = 64;
             // 
-            // BT_Log_Out
-            // 
-            this.BT_Log_Out.FlatAppearance.BorderSize = 0;
-            this.BT_Log_Out.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Log_Out.Font = new System.Drawing.Font("Andalus", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_Log_Out.Image = ((System.Drawing.Image)(resources.GetObject("BT_Log_Out.Image")));
-            this.BT_Log_Out.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BT_Log_Out.Location = new System.Drawing.Point(1082, 22);
-            this.BT_Log_Out.Name = "BT_Log_Out";
-            this.BT_Log_Out.Size = new System.Drawing.Size(190, 80);
-            this.BT_Log_Out.TabIndex = 67;
-            this.BT_Log_Out.Text = "Log Out";
-            this.BT_Log_Out.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BT_Log_Out.UseVisualStyleBackColor = true;
-            this.BT_Log_Out.Click += new System.EventHandler(this.BT_Log_Out_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(156)))), ((int)(((byte)(206)))));
-            this.panel1.Controls.Add(this.Bt_to_T);
             this.panel1.Controls.Add(this.Bt_to_F);
-            this.panel1.Controls.Add(this.Bt_to_Employ);
-            this.panel1.Controls.Add(this.Bt_to_Chef);
-            this.panel1.Controls.Add(this.Bt_To_Cashier);
             this.panel1.Location = new System.Drawing.Point(-4, 114);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(375, 733);
             this.panel1.TabIndex = 66;
-            // 
-            // Bt_to_T
-            // 
-            this.Bt_to_T.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(206)))), ((int)(((byte)(219)))));
-            this.Bt_to_T.FlatAppearance.BorderSize = 0;
-            this.Bt_to_T.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Bt_to_T.Font = new System.Drawing.Font("Andalus", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Bt_to_T.Image = ((System.Drawing.Image)(resources.GetObject("Bt_to_T.Image")));
-            this.Bt_to_T.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Bt_to_T.Location = new System.Drawing.Point(3, 450);
-            this.Bt_to_T.Name = "Bt_to_T";
-            this.Bt_to_T.Size = new System.Drawing.Size(372, 117);
-            this.Bt_to_T.TabIndex = 67;
-            this.Bt_to_T.Text = "TABLE";
-            this.Bt_to_T.UseVisualStyleBackColor = false;
             // 
             // Bt_to_F
             // 
@@ -233,57 +194,12 @@ namespace RestaurantManagement
             this.Bt_to_F.Font = new System.Drawing.Font("Andalus", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Bt_to_F.Image = ((System.Drawing.Image)(resources.GetObject("Bt_to_F.Image")));
             this.Bt_to_F.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Bt_to_F.Location = new System.Drawing.Point(3, 341);
+            this.Bt_to_F.Location = new System.Drawing.Point(3, 3);
             this.Bt_to_F.Name = "Bt_to_F";
             this.Bt_to_F.Size = new System.Drawing.Size(372, 117);
             this.Bt_to_F.TabIndex = 66;
             this.Bt_to_F.Text = "FOOD";
             this.Bt_to_F.UseVisualStyleBackColor = false;
-            // 
-            // Bt_to_Employ
-            // 
-            this.Bt_to_Employ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(206)))), ((int)(((byte)(219)))));
-            this.Bt_to_Employ.FlatAppearance.BorderSize = 0;
-            this.Bt_to_Employ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Bt_to_Employ.Font = new System.Drawing.Font("Andalus", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Bt_to_Employ.Image = ((System.Drawing.Image)(resources.GetObject("Bt_to_Employ.Image")));
-            this.Bt_to_Employ.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Bt_to_Employ.Location = new System.Drawing.Point(3, 225);
-            this.Bt_to_Employ.Name = "Bt_to_Employ";
-            this.Bt_to_Employ.Size = new System.Drawing.Size(372, 117);
-            this.Bt_to_Employ.TabIndex = 65;
-            this.Bt_to_Employ.Text = "EMPLOYEE";
-            this.Bt_to_Employ.UseVisualStyleBackColor = false;
-            // 
-            // Bt_to_Chef
-            // 
-            this.Bt_to_Chef.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(206)))), ((int)(((byte)(219)))));
-            this.Bt_to_Chef.FlatAppearance.BorderSize = 0;
-            this.Bt_to_Chef.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Bt_to_Chef.Font = new System.Drawing.Font("Andalus", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Bt_to_Chef.Image = ((System.Drawing.Image)(resources.GetObject("Bt_to_Chef.Image")));
-            this.Bt_to_Chef.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Bt_to_Chef.Location = new System.Drawing.Point(3, 111);
-            this.Bt_to_Chef.Name = "Bt_to_Chef";
-            this.Bt_to_Chef.Size = new System.Drawing.Size(372, 117);
-            this.Bt_to_Chef.TabIndex = 64;
-            this.Bt_to_Chef.Text = "CHEF";
-            this.Bt_to_Chef.UseVisualStyleBackColor = false;
-            // 
-            // Bt_To_Cashier
-            // 
-            this.Bt_To_Cashier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(206)))), ((int)(((byte)(219)))));
-            this.Bt_To_Cashier.FlatAppearance.BorderSize = 0;
-            this.Bt_To_Cashier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Bt_To_Cashier.Font = new System.Drawing.Font("Andalus", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Bt_To_Cashier.Image = ((System.Drawing.Image)(resources.GetObject("Bt_To_Cashier.Image")));
-            this.Bt_To_Cashier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Bt_To_Cashier.Location = new System.Drawing.Point(3, 0);
-            this.Bt_To_Cashier.Name = "Bt_To_Cashier";
-            this.Bt_To_Cashier.Size = new System.Drawing.Size(372, 117);
-            this.Bt_To_Cashier.TabIndex = 63;
-            this.Bt_To_Cashier.Text = "CASHIER";
-            this.Bt_To_Cashier.UseVisualStyleBackColor = false;
             // 
             // BT_Clear
             // 
@@ -319,6 +235,22 @@ namespace RestaurantManagement
             this.Bt_Refresh.Size = new System.Drawing.Size(33, 34);
             this.Bt_Refresh.TabIndex = 67;
             this.Bt_Refresh.UseVisualStyleBackColor = true;
+            // 
+            // BT_Log_Out
+            // 
+            this.BT_Log_Out.FlatAppearance.BorderSize = 0;
+            this.BT_Log_Out.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Log_Out.Font = new System.Drawing.Font("Andalus", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_Log_Out.Image = ((System.Drawing.Image)(resources.GetObject("BT_Log_Out.Image")));
+            this.BT_Log_Out.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BT_Log_Out.Location = new System.Drawing.Point(1152, 22);
+            this.BT_Log_Out.Name = "BT_Log_Out";
+            this.BT_Log_Out.Size = new System.Drawing.Size(120, 80);
+            this.BT_Log_Out.TabIndex = 65;
+            this.BT_Log_Out.Text = "Back";
+            this.BT_Log_Out.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BT_Log_Out.UseVisualStyleBackColor = true;
+            this.BT_Log_Out.Click += new System.EventHandler(this.BT_Log_Out_Click_1);
             // 
             // Mg_F_Form
             // 
@@ -371,14 +303,10 @@ namespace RestaurantManagement
         private System.Windows.Forms.Label L_Show;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button Bt_to_T;
         private System.Windows.Forms.Button Bt_to_F;
-        private System.Windows.Forms.Button Bt_to_Employ;
-        private System.Windows.Forms.Button Bt_to_Chef;
-        private System.Windows.Forms.Button Bt_To_Cashier;
         private System.Windows.Forms.Button BT_Clear;
         private System.Windows.Forms.Button BT_Save;
-        private System.Windows.Forms.Button BT_Log_Out;
         private System.Windows.Forms.Button Bt_Refresh;
+        private System.Windows.Forms.Button BT_Log_Out;
     }
 }
