@@ -67,7 +67,7 @@
     <Compile Include="Mg_Path_To_Em_And_F.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mg_Path_To_Em_And_F.Designer.cs">
+    <Compile Include="Mg_Path_To_Em_And_F.designer.cs">
       <DependentUpon>Mg_Path_To_Em_And_F.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
