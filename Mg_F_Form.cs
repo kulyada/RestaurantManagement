@@ -88,11 +88,6 @@ namespace RestaurantManagement
             }
         }
 
-        private void BT_Log_Out_Click(object sender, EventArgs e)
-        {
-            formPath.Show();
-            Close();
-        }
 
         private void BT_Save_Click(object sender, EventArgs e)
         {
@@ -128,9 +123,10 @@ namespace RestaurantManagement
             P_Food.Image = null;
         }
 
-        private void Bt_Refresh_Click(object sender, EventArgs e)
+        private void BT_Log_Out_Click_1(object sender, EventArgs e)
         {
-            
+            formPath.Show();
+            Close();
         }
     }
 }
