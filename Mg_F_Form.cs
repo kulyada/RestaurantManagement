@@ -112,5 +112,11 @@ namespace RestaurantManagement
             formPath.Show();
             Close();
         }
+
+        private void CO_SL_T_F_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
