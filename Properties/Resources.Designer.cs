@@ -59,25 +59,5 @@ namespace RestaurantManagement.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap png_clipart_restaurant_chef_s_uniform_computer_icons_cooking {
-            get {
-                object obj = ResourceManager.GetObject("png-clipart-restaurant-chef-s-uniform-computer-icons-cooking", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ดาวน์โหลด {
-            get {
-                object obj = ResourceManager.GetObject("ดาวน์โหลด", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
